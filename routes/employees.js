@@ -5,7 +5,7 @@ const EmployeesControllers = require('../controllers/employees.js');
 
 router.get('/', EmployeesControllers.getAllEmployees);
 
-router.get('/:username', EmployeesControllers.getEmployee);
+router.get('/:email', EmployeesControllers.getEmployee);
 
 router.get('/byorg/:orgid', EmployeesControllers.getEmployeesByOrg);
 

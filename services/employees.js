@@ -7,10 +7,10 @@ const getAllEmployees = () => {
 
 };
 
-const getEmployee = (username) => {
+const getEmployee = (email) => {
 
     sql = `SELECT * FROM employee
-    WHERE username = '${username}'`
+    WHERE email = '${email}'`
 
     return dbService.querypromise(sql);
 };
@@ -33,7 +33,7 @@ const getAllDataByOrg = (orgid) => {
 const addEmployee = (body) => {
     const {username, firstname, lastname, email, password, companycode, reg_date, organizationid} = body;
 
-    sql = `INSERT INTO employee (username, firstname, lastname, email, password, companycode, reg_date) VALUES ('${username}', '${firstname}', '${lastname}', '${email}', '${password}', '${companycode}', now())`
+    sql = `INSERT INTO employee (username, firstname, lastname, email, password, companycode, reg_date, organizationid) VALUES ('${username}', '${firstname}', '${lastname}', '${email}', '${password}', '${companycode}', now(), ${organizationid})`
 
     return dbService.querypromise(sql);
 }

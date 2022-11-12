@@ -12,7 +12,7 @@ module.exports = {
 
     getEmployee : async (req, res, next) => {
         try {
-            const employee = await EmployeesService.getEmployee(req.params.username);
+            const employee = await EmployeesService.getEmployee(req.params.email);
             res.status(200).json(employee)
         } catch (err) {
             res.status(500).json({"message": `Error while getting employee. Err: ${err}`});
