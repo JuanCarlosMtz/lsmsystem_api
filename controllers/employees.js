@@ -46,6 +46,16 @@ module.exports = {
         }
     },
 
+    authEmployee : async (req, res, next) => {
+        try {
+            const employee = await EmployeesService.authEmployee(req.body);
+            res.status(200).json(employee)
+        } catch (err) {
+            res.status(500).json({"message": `Error while getting employee. Err: ${err}`});
+        }
+
+    },
+
     updatePassword : async (req, res, next) => {
         try {
             const data = await EmployeesService.updatePassword(req.body);

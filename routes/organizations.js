@@ -5,7 +5,7 @@ const OrgControllers = require('../controllers/organizations.js');
 
 router.get('/', OrgControllers.getAllOrgs);
 
-router.get('/:name', OrgControllers.getOrg);
+router.post('/verifyorg', OrgControllers.verifyOrg);
 
 router.post('/add', OrgControllers.addOrg);
 

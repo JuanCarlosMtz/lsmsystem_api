@@ -38,6 +38,14 @@ const addEmployee = (body) => {
     return dbService.querypromise(sql);
 }
 
+const authEmployee = (body) => {
+    const {email, password} = body;
+
+    sql = `SELECT employee.id, firstname, lastname, email, organizationid, level1, level2, level3 FROM employee INNER JOIN progress on employee.id = progress.employeeid WHERE email = '${email} AND password = '${password}'`
+
+    return dbService.querypromise(sql);
+}
+
 const updatePassword = (body) => {
 
     const {password, id} = body;
@@ -55,5 +63,6 @@ module.exports = {
     getEmployeesByOrg,
     getAllDataByOrg,
     addEmployee,
+    authEmployee,
     updatePassword
 }

@@ -13,6 +13,8 @@ router.get('/alldatabyorg/:orgid', EmployeesControllers.getAllDataByOrg);
 
 router.post('/add', EmployeesControllers.addEmployee);
 
+router.post('/auth', EmployeesControllers.authEmployee);
+
 router.put('/update_password', EmployeesControllers.updatePassword);
 
 module.exports = router;
