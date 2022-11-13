@@ -41,7 +41,7 @@ const addEmployee = (body) => {
 const authEmployee = (body) => {
     const {email, password} = body;
 
-    sql = `SELECT employee.id, firstname, lastname, email, organizationid, level1, level2, level3 FROM employee INNER JOIN progress on employee.id = progress.employeeid WHERE email = '${email} AND password = '${password}'`
+    sql = `SELECT employee.id, firstname, lastname, email, organizationid, level1, level2, level3 FROM employee INNER JOIN progress on employee.id = progress.employeeid WHERE email = '${email}' AND password = '${password}'`
 
     return dbService.querypromise(sql);
 }
