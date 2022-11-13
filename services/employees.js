@@ -31,9 +31,9 @@ const getAllDataByOrg = (orgid) => {
 };
 
 const addEmployee = (body) => {
-    const {username, firstname, lastname, email, password, companycode, reg_date, organizationid} = body;
+    const {firstname, lastname, email, password, companycode, reg_date, organizationid} = body;
 
-    sql = `INSERT INTO employee (username, firstname, lastname, email, password, companycode, reg_date, organizationid) VALUES ('${username}', '${firstname}', '${lastname}', '${email}', '${password}', '${companycode}', now(), ${organizationid})`
+    sql = `INSERT INTO employee (firstname, lastname, email, password, companycode, reg_date, organizationid) VALUES ('${firstname}', '${lastname}', '${email}', '${password}', '${companycode}', now(), ${organizationid})`
 
     return dbService.querypromise(sql);
 }

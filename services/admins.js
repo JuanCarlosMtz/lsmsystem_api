@@ -16,9 +16,9 @@ const getAdmin = (username) => {
 };
 
 const addAdmin = (body) => {
-    const {username, firstname, lastname, email, password, companycode, reg_date, organizationid} = body;
+    const {firstname, lastname, email, password, companycode, reg_date, organizationid} = body;
 
-    sql = `INSERT INTO administrator (username, firstname, lastname, email, password, companycode, reg_date) VALUES ('${username}', '${firstname}', '${lastname}', '${email}', '${password}', '${companycode}', now())`
+    sql = `INSERT INTO administrator (firstname, lastname, email, password, companycode, reg_date) VALUES ('${firstname}', '${lastname}', '${email}', '${password}', '${companycode}', now())`
 
     return dbService.querypromise(sql);
 };
