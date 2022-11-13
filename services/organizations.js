@@ -11,7 +11,7 @@ const verifyOrg = (body) => {
 
     const {companycode} = body;
 
-    sql = `SELECT name FROM organization
+    sql = `SELECT id, name FROM organization
     WHERE companycode = '${companycode}'`
 
     return dbService.querypromise(sql);
