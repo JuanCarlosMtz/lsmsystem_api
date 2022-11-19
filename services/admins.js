@@ -1,7 +1,7 @@
 const dbService = require('../config/db.js');
 
 const getAllAdmins = () => {
-    sql = `SELECT * FROM administrator`
+    sql = `SELECT id, username, email, reg_date, organizationid FROM administrator`
 
     return dbService.querypromise(sql);
 
@@ -9,16 +9,23 @@ const getAllAdmins = () => {
 
 const getAdmin = (username) => {
 
-    sql = `SELECT * FROM administrator
+    sql = `SELECT id, username, email, reg_date, organizationid FROM administrator
     WHERE username = '${username}'`
 
     return dbService.querypromise(sql);
 };
 
-const addAdmin = (body) => {
-    const {firstname, lastname, email, password, companycode, reg_date, organizationid} = body;
+const getPassword = (username) => {
 
-    sql = `INSERT INTO administrator (firstname, lastname, email, password, companycode, reg_date) VALUES ('${firstname}', '${lastname}', '${email}', '${password}', '${companycode}', now())`
+    sql = `SELECT password FROM employee WHERE username = '${username}'`
+
+    return dbService.querypromise(sql);
+}
+
+const addAdmin = (body) => {
+    const {username, email, password, companycode, organizationid} = body;
+
+    sql = `INSERT INTO administrator (username, email, password, companycode, reg_date, organizationid) VALUES ('${username}', '${email}', '${password}', '${companycode}', now(), ${organizationid})`
 
     return dbService.querypromise(sql);
 };
@@ -37,6 +44,7 @@ const updatePassword = (body) => {
 module.exports = {
     getAllAdmins,
     getAdmin,
+    getPassword,
     addAdmin,
     updatePassword
 }

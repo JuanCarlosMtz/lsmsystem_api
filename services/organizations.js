@@ -1,7 +1,21 @@
 const dbService = require('../config/db.js');
 
 const getAllOrgs = () => {
-    sql = `SELECT * FROM organization`
+    sql = `SELECT id, name, reg_date FROM organization`
+
+    return dbService.querypromise(sql);
+
+};
+
+const getOrgsData = () => {
+    sql = `SELECT id, name, companycode FROM organization`
+
+    return dbService.querypromise(sql);
+
+};
+
+const getOrg = (name) => {
+    sql = `SELECT id, name, reg_date FROM organization WHERE name = '${name}'`
 
     return dbService.querypromise(sql);
 
@@ -28,6 +42,8 @@ const addOrg = (body) => {
 
 module.exports = {
     getAllOrgs,
+    getOrgsData,
+    getOrg,
     verifyOrg,
     addOrg
 }

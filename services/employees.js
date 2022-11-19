@@ -1,23 +1,30 @@
 const dbService = require('../config/db.js');
 
 const getAllEmployees = () => {
-    sql = `SELECT * FROM employee`
+    sql = `SELECT id, username, email, reg_date, organizationid FROM employee`
 
     return dbService.querypromise(sql);
 
 };
 
-const getEmployee = (email) => {
+const getEmployee = (username) => {
 
-    sql = `SELECT * FROM employee
-    WHERE email = '${email}'`
+    sql = `SELECT id, username, email, reg_date, organizationid FROM employee
+    WHERE username = '${username}'`
 
     return dbService.querypromise(sql);
 };
+
+const getPassword = (username) => {
+
+    sql = `SELECT password FROM employee WHERE username = '${username}'`
+
+    return dbService.querypromise(sql);
+}
 
 const getEmployeesByOrg = (orgid) => {
 
-    sql = `SELECT * FROM employee
+    sql = `SELECT id, username, email, reg_date, organizationid FROM employee
     WHERE organizationid = ${orgid}`
 
     return dbService.querypromise(sql);
@@ -25,23 +32,22 @@ const getEmployeesByOrg = (orgid) => {
 
 const getAllDataByOrg = (orgid) => {
 
-    sql = `SELECT * FROM employee INNER JOIN progress on employee.id = progress.employeeid WHERE employee.organizationid = ${orgid}`
+    sql = `SELECT employee.id, username, email, reg_date, organizationid, level1, level2, level3 FROM employee INNER JOIN progress on employee.id = progress.employeeid WHERE employee.organizationid = ${orgid}`
 
     return dbService.querypromise(sql);
 };
 
 const addEmployee = (body) => {
-    const {firstname, lastname, email, password, companycode, reg_date, organizationid} = body;
+    const {username, email, password, companycode, organizationid} = body;
 
-    sql = `INSERT INTO employee (firstname, lastname, email, password, companycode, reg_date, organizationid) VALUES ('${firstname}', '${lastname}', '${email}', '${password}', '${companycode}', now(), ${organizationid})`
+    sql = `INSERT INTO employee (username, email, password, companycode, reg_date, organizationid) VALUES ('${username}', '${email}', '${password}', '${companycode}', now(), ${organizationid})`
 
     return dbService.querypromise(sql);
 }
 
-const authEmployee = (body) => {
-    const {email, password} = body;
+const authEmployee = (username) => {
 
-    sql = `SELECT employee.id, firstname, lastname, email, organizationid, level1, level2, level3 FROM employee INNER JOIN progress on employee.id = progress.employeeid WHERE email = '${email}' AND password = '${password}'`
+    sql = `SELECT employee.id, username, email, organizationid, level1, level2, level3 FROM employee INNER JOIN progress on employee.id = progress.employeeid WHERE username = '${username}'`
 
     return dbService.querypromise(sql);
 }
@@ -60,6 +66,7 @@ const updatePassword = (body) => {
 module.exports = {
     getAllEmployees,
     getEmployee,
+    getPassword,
     getEmployeesByOrg,
     getAllDataByOrg,
     addEmployee,
