@@ -52,11 +52,19 @@ module.exports = {
             }
         }
         if (isOrgRegistered == false) {
-            res.status(400).json({"message": `Company not found`});
+            const response = {
+                insertId: -1,
+                message : "Company not found"
+            };
+            res.status(400).json(response);
         } else {
             const users = await EmployeesService.getEmployee(req.body.username);
             if (users != 0) {
-                res.status(400).json({"message": `User already exists`});
+                const response = {
+                    insertId: -1,
+                    message : "User already exists"
+                };
+                res.status(400).json(response);
             } else {
                 try {
                     const hashedPassword = await bcrypt.hash(req.body.password, 10);
