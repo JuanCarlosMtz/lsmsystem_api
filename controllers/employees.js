@@ -89,14 +89,22 @@ module.exports = {
         const password = await EmployeesService.getPassword(req.body.username);
 
         if (password == 0) {
-            res.status(400).json({"message": `User not found`});
+            const response = {
+                id: -1,
+                message : "User already exists"
+            };
+            res.status(200).json(response);
         } else {
             try {
                 if (await bcrypt.compare(req.body.password, password[0].password)) {
                     const employee = await EmployeesService.authEmployee(req.body.username);
                     res.status(200).json(employee)
                 } else {
-                    res.json({"message": `Not Allowed`});
+                    const response = {
+                        id: -1,
+                        message : "Not allowe"
+                    };
+                    res.json(response);
                 } 
             } catch (err) {
                 res.status(500).json({"message": `Error while getting employee. Err: ${err}`});
