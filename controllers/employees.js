@@ -89,10 +89,12 @@ module.exports = {
         const password = await EmployeesService.getPassword(req.body.username);
 
         if (password == 0) {
-            const response = {
-                id: -1,
-                message : "User already exists"
-            };
+            const response = [
+                {
+                    id: -1,
+                    message : "User not found"
+                }
+            ];
             res.status(200).json(response);
         } else {
             try {
@@ -100,10 +102,12 @@ module.exports = {
                     const employee = await EmployeesService.authEmployee(req.body.username);
                     res.status(200).json(employee)
                 } else {
-                    const response = {
-                        id: -1,
-                        message : "Not allowe"
-                    };
+                    const response = [
+                        {
+                            id: -1,
+                            message : "Not allowed"
+                        }
+                    ];
                     res.json(response);
                 } 
             } catch (err) {
