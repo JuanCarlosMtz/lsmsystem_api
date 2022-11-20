@@ -126,7 +126,13 @@ module.exports = {
                         password: hashedNewPassword
                     };
                 const data = await EmployeesService.updatePassword(employeeData);
-                res.status(200).json(data)
+                const response = [
+                    {
+                        affectedRows: data.affectedRows,
+                        message: "Updated successfuly"
+                    }
+                ]
+                res.status(200).json(response);
             } else {
                 const response = [
                     {
