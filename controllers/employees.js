@@ -56,7 +56,7 @@ module.exports = {
                 insertId: -1,
                 message : "Company not found"
             };
-            res.status(400).json(response);
+            res.status(200).json(response);
         } else {
             const users = await EmployeesService.getEmployee(req.body.username);
             if (users != 0) {
@@ -64,7 +64,7 @@ module.exports = {
                     insertId: -1,
                     message : "User already exists"
                 };
-                res.status(400).json(response);
+                res.status(200).json(response);
             } else {
                 try {
                     const hashedPassword = await bcrypt.hash(req.body.password, 10);
