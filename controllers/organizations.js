@@ -11,6 +11,15 @@ module.exports = {
         }
     },
 
+    getById : async (req, res, next) => {
+        try {
+            const org = await OrgsService.getById(req.params.id);
+            res.status(200).json(org) 
+        } catch (err) {
+            res.status(500).json({"message": `Error while getting organization. Err: ${err}`});
+        }
+    },
+
     verifyOrg : async (req, res, next) => {
         try {
             const org = await OrgsService.verifyOrg(req.body);

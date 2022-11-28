@@ -7,6 +7,13 @@ const getAllOrgs = () => {
 
 };
 
+const getById = (id) => {
+    sql = `SELECT id, name, reg_date FROM organization WHERE id=${id}`
+
+    return dbService.querypromise(sql);
+
+};
+
 const getOrgsData = () => {
     sql = `SELECT id, name, companycode FROM organization`
 
@@ -42,6 +49,7 @@ const addOrg = (body) => {
 
 module.exports = {
     getAllOrgs,
+    getById,
     getOrgsData,
     getOrg,
     verifyOrg,

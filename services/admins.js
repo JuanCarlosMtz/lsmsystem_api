@@ -17,7 +17,7 @@ const getAdmin = (username) => {
 
 const getPassword = (username) => {
 
-    sql = `SELECT password FROM employee WHERE username = '${username}'`
+    sql = `SELECT password FROM administrator WHERE username = '${username}'`
 
     return dbService.querypromise(sql);
 }

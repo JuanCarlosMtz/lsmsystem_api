@@ -7,6 +7,8 @@ router.get('/', ProgressControllers.getAllProgress);
 
 router.get('/:employeeid', ProgressControllers.getProgress);
 
+router.get('/total/progress/:organizationid', ProgressControllers.getTotalProgress);
+
 router.post('/create', ProgressControllers.createProgress);
 
 router.put('/update', ProgressControllers.updateProgress);

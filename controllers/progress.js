@@ -19,6 +19,15 @@ module.exports = {
         }
     },
 
+    getTotalProgress : async (req, res, next) => {
+        try {
+            const progress = await ProgressService.getTotalProgress(req.params.organizationid);
+            res.status(200).json(progress)
+        } catch (err) {
+            res.status(500).json({"message": `Error while getting progress. Err: ${err}`});
+        }
+    },
+
     createProgress : async (req, res, next) => {
         try {
             const progress = await ProgressService.createProgress(req.body);

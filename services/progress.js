@@ -15,6 +15,13 @@ const getProgress = (employeeid) => {
     return dbService.querypromise(sql);
 };
 
+const getTotalProgress = (organizationid) => {
+
+    sql = `SELECT SUM(level1 + level2 + level3) totalProgress, count(*) totalEmp FROM progress INNER JOIN employee on employee.id = progress.employeeid WHERE employee.organizationid = ${organizationid}`
+
+    return dbService.querypromise(sql);
+};
+
 const createProgress = (body) => {
     const {level1, level2, level3, employeeid} = body;
 
@@ -39,6 +46,7 @@ const updateProgress = (body) => {
 module.exports = {
     getAllProgress,
     getProgress,
+    getTotalProgress,
     createProgress,
     updateProgress
 }
