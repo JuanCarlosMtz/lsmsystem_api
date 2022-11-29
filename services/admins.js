@@ -30,13 +30,13 @@ const addAdmin = (body) => {
     return dbService.querypromise(sql);
 };
 
-const updatePassword = (body) => {
+const setNewPassword = (body) => {
 
-    const {password, id} = body;
+    const {username, password} = body;
 
-    sql = `UPDATE administrator
+    sql = `UPDATE employee
            SET password = '${password}'
-            WHERE id = ${id}`
+            WHERE username = '${username}'`
 
     return dbService.querypromise(sql);
 };
@@ -46,5 +46,5 @@ module.exports = {
     getAdmin,
     getPassword,
     addAdmin,
-    updatePassword
+    setNewPassword
 }

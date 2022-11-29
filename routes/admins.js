@@ -11,6 +11,6 @@ router.post('/add', AdminsControllers.addAdmin);
 
 router.post('/login', AdminsControllers.login);
 
-router.put('/update_password', AdminsControllers.updatePassword);
+router.post('/setnewpwd', AdminsControllers.setNewPassword);
 
 module.exports = router;

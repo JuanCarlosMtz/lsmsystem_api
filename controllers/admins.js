@@ -1,5 +1,6 @@
 const AdminsService = require ('../services/admins.js');
 const OrgsService = require ('../services/organizations.js');
+const EmployeesService = require ('../services/employees.js');
 const bcrypt = require('bcrypt');
 
 module.exports = {
@@ -99,12 +100,30 @@ module.exports = {
     },
 
 
-    updatePassword : async (req, res, next) => {
-        try {
-            const data = await AdminsService.updatePassword(req.body);
-            res.status(200).json(data)
-        } catch (err) {
-            res.status(500).json({"message": `Error while getting data. Err: ${err}`});
+    setNewPassword : async (req, res, next) => {
+        const employee = await EmployeesService.getEmployee(req.body.username);
+
+        if (employee == 0) {
+            const response = [
+                {
+                    id: -1,
+                    message : "User not found",
+                    affectedRows: -1
+                }
+            ];
+            res.status(200).json(response);
+        } else {
+            try {
+                const hashedPassword = await bcrypt.hash(req.body.password, 10);
+                const employeeData = {
+                    username: req.body.username,
+                    password: hashedPassword,
+                };
+                const employee = await AdminsService.setNewPassword(employeeData);
+                res.status(200).json([employee])
+            } catch (err) {
+                res.status(500).json({"message": `Error while getting user. Err: ${err}`});
+            }
         }
     }
 };
